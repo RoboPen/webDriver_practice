@@ -53,6 +53,16 @@ public class DeliverToTest {
         Assert.assertTrue(destinationName.getText().contains(cityName));
     }
 
+    @Test
+    public void PolandIsPresentOnList(){
+        WebElement deliverIcon = driver.findElement(By.id("glow-ingress-block"));
+        deliverIcon.click();
+        WebElement listDropdown = new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.elementToBeClickable(By.id("GLUXCountryListDropdown")));
+        listDropdown.click();
+        WebElement polandLink = driver.findElement(By.xpath("//a[text()=\"Poland\"]"));
+        Assert.assertTrue(polandLink.isDisplayed());
+    }
 
     @AfterMethod
     public void after(){
