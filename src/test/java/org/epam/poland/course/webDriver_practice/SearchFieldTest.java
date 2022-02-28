@@ -79,7 +79,10 @@ public class SearchFieldTest {
         WebElement confirmSearchBtn = driver.findElement(By.id("nav-search-submit-button"));
         confirmSearchBtn.click();
 
-        int numOfPages = Integer.parseInt(driver.findElement(By.xpath("//span[@class='s-pagination-strip']/span[4]")).getText());
+        //if next button is not present (there is only one page), assign 1
+        int numOfPages = driver.findElements(By.xpath("////span[@class='s-pagination-strip']/span[4]")).isEmpty() ?
+                 1 : Integer.parseInt(driver.findElement(By.xpath("//span[@class='s-pagination-strip']/span[4]")).getText());
+
         boolean anyTitleContainsInputWord = false;
 
         for (int i = 1; i <= numOfPages; i++) {
