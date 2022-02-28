@@ -64,15 +64,23 @@ public class DeliverToTest {
         Assert.assertTrue(polandLink.isDisplayed());
     }
 
+    @DataProvider(name = "countries")
+    public Object[][] countries() {
+        return new Object[][]{
+                {"Austria"},
+                {"Germany"},
+                {"India"}
+        };
+    }
 
-    @Test
-    public void verifyShippingCountry() throws InterruptedException {
+    @Test(dataProvider = "countries")
+    public void verifyShippingCountry(String country) throws InterruptedException {
         WebElement deliverIcon = driver.findElement(By.id("glow-ingress-block"));
         deliverIcon.click();
         WebElement listDropdown = new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.elementToBeClickable(By.id("GLUXCountryListDropdown")));
         listDropdown.click();
-        WebElement countryLink = driver.findElement(By.xpath("//a[text()=\"Austria\"]"));
+        WebElement countryLink = driver.findElement(By.xpath(String.format("//a[text()=\"%s\"]", country)));
         countryLink.click();
         WebElement doneButton = driver.findElement(By.xpath("//button[@name=\"glowDoneButton\"]"));
         doneButton.click();
@@ -88,7 +96,7 @@ public class DeliverToTest {
         WebElement deliveryInfo = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.id("contextualIngressPtLabel_deliveryShortLine")));
 
-        Assert.assertTrue(deliveryInfo.getText().contains("Austria"));
+        Assert.assertTrue(deliveryInfo.getText().contains(country));
     }
 
     @AfterMethod
