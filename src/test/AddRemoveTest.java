@@ -37,7 +37,7 @@ public class AddRemoveTest {
 
     @Test
     public void addToCartTest() {
-        WebElement addedToCartConfirmation = driver.findElement(By.xpath("//div[contains(@class, \"sw-atc-message-section\")]/div/span[normalize-space(text()=\"Added to Cart\")]"));
+        WebElement addedToCartConfirmation = driver.findElement(By.xpath("//div[contains(@class, \"sw-atc-message-section\")]//span[normalize-space(text()=\"Added to Cart\")]"));
         Assert.assertEquals(addedToCartConfirmation.getText(), "Added to Cart");
 
         WebElement numberOfItemsInTheCart = driver.findElement(By.id("nav-cart-count"));
@@ -53,7 +53,7 @@ public class AddRemoveTest {
         WebElement deleteButton = driver.findElement(By.xpath("//input[@value =\"Delete\"]"));
         deleteButton.click();
 
-        WebElement cartIsEmptyConfirmation = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"a-row sc-cart-header\"]/div/h1[normalize-space(text()=\"Your Amazon Cart is empty.\")]")));
+        WebElement cartIsEmptyConfirmation = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class=\"a-row sc-cart-header\"]//h1[normalize-space(text()=\"Your Amazon Cart is empty.\")]")));
         Assert.assertEquals(cartIsEmptyConfirmation.getText(), "Your Amazon Cart is empty.");
 
         WebElement priceOfItemInTheCart = driver.findElement(By.xpath("//span[text()=\"$0.00\"]"));
