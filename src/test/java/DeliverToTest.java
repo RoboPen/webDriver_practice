@@ -9,6 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class DeliverToTest {
@@ -53,15 +55,19 @@ public class DeliverToTest {
     }
 
     @Test
-    public void PolandIsPresentOnList() {
+    public void polandIsPresentOnList() {
         WebElement deliverIcon = driver.findElement(By.id("glow-ingress-block"));
         deliverIcon.click();
         WebElement listDropdown = new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.elementToBeClickable(By.id("GLUXCountryListDropdown")));
         listDropdown.click();
-        WebElement polandLink = driver.findElement(By.xpath("//a[text()=\"Poland\"]"));
+        List<String> listOfCountries =
+                driver.findElements(By.xpath("//ul[contains(@class, \"a-list-link\")]/li"))
+                        .stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList());
 
-        Assert.assertTrue(polandLink.isDisplayed());
+        Assert.assertTrue(listOfCountries.contains("Poland"));
     }
 
     @DataProvider(name = "countries")
@@ -74,7 +80,7 @@ public class DeliverToTest {
     }
 
     @Test(dataProvider = "countries")
-    public void verifyShippingCountry(String country) throws InterruptedException {
+    public void verifyShippingCountry(String country) {
         WebElement deliverIcon = driver.findElement(By.id("glow-ingress-block"));
         deliverIcon.click();
         WebElement listDropdown = new WebDriverWait(driver, Duration.ofSeconds(3))
@@ -84,8 +90,9 @@ public class DeliverToTest {
         countryLink.click();
         WebElement doneButton = driver.findElement(By.xpath("//button[@name=\"glowDoneButton\"]"));
         doneButton.click();
-        // need to use Thread.sleep because page is reloading
-        Thread.sleep(3000);
+        // need to wait until page automatically reloads
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.stalenessOf(deliverIcon));
         WebElement headsetsCategory = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[contains(@alt,\"Headsets\")]/../..")));
         headsetsCategory.click();
