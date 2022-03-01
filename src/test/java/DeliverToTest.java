@@ -44,11 +44,8 @@ public class DeliverToTest {
         WebElement continueButton = new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath("(//input[@id=\"GLUXConfirmClose\"]/../..)[2]")));
         continueButton.click();
-        String destinationNameFirst = driver.findElement(By.id("glow-ingress-line2")).getText();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait.until(ExpectedConditions
-                .not(ExpectedConditions
-                        .textToBePresentInElement(driver.findElement(By.id("glow-ingress-line2")), destinationNameFirst)));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.stalenessOf(deliverIcon));
         WebElement destinationName = driver.findElement(By.id("glow-ingress-line2"));
 
         Assert.assertTrue(destinationName.getText().contains(cityName));
