@@ -80,8 +80,8 @@ public class SearchFieldTest {
         confirmSearchBtn.click();
 
         //if next button is not present (there is only one page), assign 1
-        int numOfPages = driver.findElements(By.xpath("////span[@class='s-pagination-strip']/span[4]")).isEmpty() ?
-                 1 : Integer.parseInt(driver.findElement(By.xpath("//span[@class='s-pagination-strip']/span[4]")).getText());
+        int numOfPages = driver.findElements(By.xpath("//span[@class='s-pagination-strip']/span[last()]")).isEmpty() ?
+                 1 : Integer.parseInt(driver.findElement(By.xpath("//span[@class='s-pagination-strip']/span[last()]")).getText());
 
         boolean anyTitleContainsInputWord = false;
 
@@ -101,7 +101,7 @@ public class SearchFieldTest {
             //click next button until its not clickable, based on num of pages
             if (numOfPages != i) {
                 WebElement nextButton = new WebDriverWait(driver, Duration.ofSeconds(6))
-                        .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class,'s-pagination-next')]")));
+                        .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@class,'s-pagination-next')]")));
                 nextButton.click();
             }
         }
