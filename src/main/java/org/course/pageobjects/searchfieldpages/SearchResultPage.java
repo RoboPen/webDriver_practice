@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class SearchResultPage extends BasePage {
-    String searchBoxInputValue;
+    private String searchBoxInputValue;
 
     public SearchResultPage(WebDriver webDriver, String productName) {
         super(webDriver);
