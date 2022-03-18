@@ -1,6 +1,6 @@
 package uitestes.delivertotest;
 
-import factory.WebDriverFactory;
+import org.course.factory.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
 
 public abstract class BaseTest {

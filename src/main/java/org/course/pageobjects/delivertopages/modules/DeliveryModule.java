@@ -13,13 +13,13 @@ import java.time.Duration;
 import java.util.List;
 
 public class DeliveryModule extends BasePage {
-    WebElement zipCodeInput;
+    private WebElement zipCodeInput;
 
-    WebElement applyButton;
+    private WebElement applyButton;
 
-    WebElement countryDropdownButton;
+    private WebElement countryDropdownButton;
 
-    WebElement doneButton;
+    private WebElement doneButton;
 
     public DeliveryModule(WebDriver driver) {
         super(driver);
@@ -52,7 +52,6 @@ public class DeliveryModule extends BasePage {
         countryDropdownButton.click();
         WebElement countryLink = driver.findElement(By.xpath(String.format("//a[text()=\"%s\"]", country)));
         countryLink.click();
-        WebElement doneButton = driver.findElement(By.xpath("//button[@name=\"glowDoneButton\"]"));
         doneButton.click();
         return new MainPage(driver);
     }

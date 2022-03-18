@@ -15,16 +15,16 @@ import java.util.stream.Collectors;
 public class MainPage extends BasePage {
 
     @FindBy(xpath = "//a[@aria-label=\"Headsets\"]")
-    public WebElement headsetesLink;
+    private WebElement headsetesLink;
 
     //    @FindBy(id = "glow-ingress-block")
-    WebElement deliverIcon;
+    private WebElement deliverIcon;
 
     @FindBy(xpath = "//span[text()=\"Apply\"]/..")
-    WebElement applyZipCodeButton;
+    private WebElement applyZipCodeButton;
 
     @FindBy(id = "glow-ingress-line2")
-    WebElement destinationName;
+    private WebElement destinationName;
 
     public MainPage(WebDriver driver) {
         super(driver);

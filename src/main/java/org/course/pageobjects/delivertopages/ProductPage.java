@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public class ProductPage extends BasePage {
 
     @FindBy(xpath = "//div[@id=\"contextualIngressPtLabel_deliveryShortLine\"]/span[2]")
-    WebElement countryName;
+    private WebElement countryName;
 
     public ProductPage(WebDriver driver) {
         super(driver);
