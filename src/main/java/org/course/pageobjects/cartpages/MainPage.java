@@ -4,16 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CategoryPage extends BasePage {
+public class MainPage extends BasePage {
 
     @FindBy(xpath = "//a[@aria-label = \"Toys & Games\"]")
     private WebElement category;
 
-    public CategoryPage(WebDriver webDriver) {
+    public MainPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-    public CategoryPage open() {
+    public MainPage open() {
         webDriver.get("https://www.amazon.com/");
         return this;
     }

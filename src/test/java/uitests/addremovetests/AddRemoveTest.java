@@ -1,7 +1,7 @@
 package uitests.addremovetests;
 
 import org.course.pageobjects.cartpages.CartPage;
-import org.course.pageobjects.cartpages.CategoryPage;
+import org.course.pageobjects.cartpages.MainPage;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class AddRemoveTest extends BaseTest {
 
-    public CategoryPage category;
+    public MainPage mainPage;
     public CartPage cart;
 
 
@@ -17,7 +17,7 @@ public class AddRemoveTest extends BaseTest {
     public void testSetup() {
         setUpDriver();
         initObjects();
-        category.open().searchCategory().drawAnItem().addToTheCart();
+        mainPage.open().searchCategory().drawAnItem().addToTheCart();
     }
 
     @AfterTest
@@ -39,7 +39,7 @@ public class AddRemoveTest extends BaseTest {
     }
 
     private void initObjects() {
-        category = new CategoryPage(driver);
+        mainPage = new MainPage(driver);
         cart = new CartPage(driver);
     }
 }
